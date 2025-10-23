@@ -1,65 +1,85 @@
+'use client'
 import Image from "next/image";
+import { storeData } from "@/mockData/data";
+import { LineChart, Line, BarChart, Bar, PieChart, Pie, Cell, Tooltip, XAxis, YAxis, CartesianGrid, Legend, ResponsiveContainer } from "recharts";
+import { motion } from "framer-motion";
+import StatCounter from "@/components/StateCounter";
 
 export default function Home() {
+   const CustomToolTip = ({ active, payload, label }) => {
+  if (active && payload && payload.length) {
+    const value = payload[0].value?.toLocaleString(); 
+    return (
+      <div className="bg-gray-900/95 border border-[#10b981]/50 rounded-lg px-4 py-2 shadow-lg backdrop-blur-sm">
+        <p className="text-sm text-gray-400 uppercase tracking-wide">{label}</p>
+        <p className="text-base font-semibold text-[#10b981] mt-1">
+          Revenue: <span className="text-white ml-1">${value}</span>
+        </p>
+      </div>
+    );
+  }
+  return null;
+};
+
   return (
-    <div className="flex min-h-screen items-center justify-center bg-zinc-50 font-sans dark:bg-black">
-      <main className="flex min-h-screen w-full max-w-3xl flex-col items-center justify-between py-32 px-16 bg-white dark:bg-black sm:items-start">
-        <Image
-          className="dark:invert"
-          src="/next.svg"
-          alt="Next.js logo"
-          width={100}
-          height={20}
-          priority
-        />
-        <div className="flex flex-col items-center gap-6 text-center sm:items-start sm:text-left">
-          <h1 className="max-w-xs text-3xl font-semibold leading-10 tracking-tight text-black dark:text-zinc-50">
-            To get started, edit the page.js file.
-          </h1>
-          <p className="max-w-md text-lg leading-8 text-zinc-600 dark:text-zinc-400">
-            Looking for a starting point or more instructions? Head over to{" "}
-            <a
-              href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-              className="font-medium text-zinc-950 dark:text-zinc-50"
-            >
-              Templates
-            </a>{" "}
-            or the{" "}
-            <a
-              href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-              className="font-medium text-zinc-950 dark:text-zinc-50"
-            >
-              Learning
-            </a>{" "}
-            center.
-          </p>
-        </div>
-        <div className="flex flex-col gap-4 text-base font-medium sm:flex-row">
-          <a
-            className="flex h-12 w-full items-center justify-center gap-2 rounded-full bg-foreground px-5 text-background transition-colors hover:bg-[#383838] dark:hover:bg-[#ccc] md:w-[158px]"
-            href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
+    <div className="flex flex-col gap-3.5">
+     <header className="flex p-5">
+       <h2 className="text-2xl font-bold bg-gray-800/50 p-2 rounded-lg">Dashboard</h2>
+     </header>
+     <main className="flex flex-col w-full items-center">
+      <div className="flex flex-col gap-8 sm:gap-0 sm:flex-row w-[90%] sm:w-[80%] bg-gray-800/30 p-2 pt-7 rounded-2xl">
+          <motion.div 
+          initial={{opacity:0, y:30}}
+          animate={{opacity:1, y:0}}
+          transition={{duration : 0.8}}
+          className="w-full sm:w-1/2"
           >
-            <Image
-              className="dark:invert"
-              src="/vercel.svg"
-              alt="Vercel logomark"
-              width={16}
-              height={16}
-            />
-            Deploy Now
-          </a>
-          <a
-            className="flex h-12 w-full items-center justify-center rounded-full border border-solid border-black/[.08] px-5 transition-colors hover:border-transparent hover:bg-black/[.04] dark:border-white/[.145] dark:hover:bg-[#1a1a1a] md:w-[158px]"
-            href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Documentation
-          </a>
-        </div>
-      </main>
+            <div className="h-[300px] sm:h-[400px] w-full">
+           <ResponsiveContainer width={"100%"} height={"100%"}>
+            <BarChart
+            width = {500}
+            height = {300}
+            data = {storeData.total.monthlySales}
+            margin = {{
+              right : 30, 
+            }}>
+             <CartesianGrid strokeDasharray="3 3"/>
+             <XAxis dataKey={"month"}/>
+             <YAxis dataKey={"revenue"}/>
+             <Legend/>
+             <Tooltip content={<CustomToolTip/>}/>
+             <defs>
+            <linearGradient id="glowGreen" x1="0" y1="0" x2="0" y2="1">
+            <stop offset="0%" stopColor="#10b981" stopOpacity={0.9} />
+            <stop offset="100%" stopColor="#10b981" stopOpacity={0.3} />
+           </linearGradient>
+           </defs>
+            <Bar dataKey="revenue" fill="url(#glowGreen)" radius={[8, 8, 0, 0]} />
+            </BarChart>
+           </ResponsiveContainer>
+           </div>
+          </motion.div>
+          <motion.div
+  initial={{ opacity: 0, y: 30 }}
+  animate={{ opacity: 1, y: 0 }}
+  transition={{ duration: 0.8 }}
+  className="w-full sm:w-1/2 flex flex-col justify-center items-center gap-6 p-6 bg-gray-800/40 rounded-2xl border border-[#10b981]/20 backdrop-blur-sm"
+>
+  <h3 className="text-2xl font-semibold text-white mb-2 border-b border-[#10b981]/30 pb-2 w-full text-center">
+    Overview
+  </h3>
+
+  <div className="grid grid-cols-1 sm:grid-cols-2 gap-6 w-full">
+    <StatCounter target={storeData.total.revenue} label="Revenue" />
+    <StatCounter target={storeData.total.profit} label="Profit" />
+    <StatCounter target={storeData.total.customers} label="Customers" />
+    <StatCounter target={storeData.total.totalOrders} label="Total Orders" />
+  </div>
+    </motion.div>
+
+      </div>
+       
+     </main>
     </div>
   );
 }
