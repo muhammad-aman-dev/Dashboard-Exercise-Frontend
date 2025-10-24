@@ -18,6 +18,13 @@ export const storeData = {
       { month: "Nov", revenue: 143000 },
       { month: "Dec", revenue: 154000 },
     ],
+    topProducts: [
+      { id: "p01", name: "Smartphone X12", category: "Electronics", unitsSold: 320, revenue: 128000 },
+      { id: "p02", name: "Organic Apples Pack", category: "Groceries", unitsSold: 850, revenue: 10200 },
+      { id: "p03", name: "Designer Handbag", category: "Fashion", unitsSold: 145, revenue: 27400 },
+      { id: "p04", name: "Luxury Sofa Set", category: "Furniture", unitsSold: 35, revenue: 42000 },
+      { id: "p05", name: "Face Serum", category: "Cosmetics", unitsSold: 210, revenue: 8700 },
+    ],
   },
 
   departments: [
