@@ -5,6 +5,7 @@ import { LineChart, ReferenceLine, ReferenceDot, Area, AreaChart, Line, BarChart
 import { motion } from "framer-motion";
 import StatCounter from "@/components/StateCounter";
 import Footer from "@/components/Footer";
+import Link from "next/link";
 
 export default function Home() {
   const bestMonth = storeData.total.monthlySales.reduce((max, curr) =>
@@ -341,6 +342,9 @@ const avgRevenue =
       <p className="text-gray-400 text-sm">Revenue: ${dept.revenue.toLocaleString()}</p>
       <p className="text-gray-400 text-sm">Profit: ${dept.profit.toLocaleString()}</p>
       <p className="text-gray-400 text-sm">Growth: {dept.growth}%</p>
+      <div className="flex justify-end w-full">
+      <Link href={`/${dept.id}`} className="border-[#10b981] border-b w-fit">view details {'>'}</Link>
+    </div>
     </motion.div>
   ))}
 </div>
