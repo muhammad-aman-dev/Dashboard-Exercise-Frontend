@@ -1,63 +1,88 @@
 'use client'
-import { LineChart, ReferenceLine, ReferenceDot, Area, AreaChart, Line, BarChart, Bar, PieChart, Pie, Cell, Tooltip, XAxis, YAxis, CartesianGrid, Legend, ResponsiveContainer } from "recharts";
+import { LineChart, Line, ReferenceLine, ReferenceDot, BarChart, Bar, Tooltip, XAxis, YAxis, CartesianGrid, Legend, ResponsiveContainer } from "recharts";
 import { motion } from "framer-motion";
 import StatCounter from "@/components/StateCounter";
 import Footer from "@/components/Footer";
 import { storeData } from "@/mockData/data";
 import { useParams } from "next/navigation";
-import { useState, useEffect, useEffectEvent } from "react";
-
+import { useState, useEffect } from "react";
 
 const page = () => {
-    const params = useParams()
-    const [isLoading, setisLoading] = useState(false);
-    const [departData, setdepartData] = useState({});
-    const { department } = params;
-    useEffect(() => {
-      setisLoading(true);
-      const data =storeData.departments.filter((data)=>{
-    if(data.id==department) return data;
-    })
-    console.log(data[0])
-     setdepartData(data[0]);
-     setisLoading(false);
-    }, [])
-    
-    
-const CustomToolTip = ({ active, payload, label }) => {
-  if (active && payload && payload.length) {
-    const value = payload[0].value?.toLocaleString(); 
+  const params = useParams();
+  const [isLoading, setIsLoading] = useState(true);
+  const [departData, setDepartData] = useState(null);
+  const { department } = params;
+
+  useEffect(() => {
+    setIsLoading(true);
+    const data = storeData.departments?.filter((d) => d.id == department);
+    const selected = data?.[0] || null;
+    setDepartData(selected);
+    setIsLoading(false);
+  }, [department]);
+
+  const CustomToolTip = ({ active, payload, label }) => {
+    if (active && payload && payload.length) {
+      const value = payload[0].value?.toLocaleString();
+      return (
+        <div className="bg-gray-900/95 border border-[#10b981]/50 rounded-lg px-4 py-2 shadow-lg backdrop-blur-sm">
+          <p className="text-sm text-gray-400 uppercase tracking-wide">{label}</p>
+          <p className="text-base font-semibold text-[#10b981] mt-1">
+            Revenue: <span className="text-white ml-1">${value}</span>
+          </p>
+        </div>
+      );
+    }
+    return null;
+  };
+
+  // 👇 Handle loading or missing data
+  if (isLoading) {
     return (
-      <div className="bg-gray-900/95 border border-[#10b981]/50 rounded-lg px-4 py-2 shadow-lg backdrop-blur-sm">
-        <p className="text-sm text-gray-400 uppercase tracking-wide">{label}</p>
-        <p className="text-base font-semibold text-[#10b981] mt-1">
-          Revenue: <span className="text-white ml-1">${value}</span>
-        </p>
+      <div className="w-full h-full flex justify-center items-center">
+        Loading...
       </div>
     );
   }
-  return null;
-};
 
+  if (!departData) {
+    return (
+      <div className="w-full h-full flex justify-center items-center text-gray-400">
+        Department data not found.
+      </div>
+    );
+  }
 
+  // 👇 Safely handle empty or missing monthlySales
+  const monthlySales = departData.monthlySales || [];
 
-if(isLoading || !departData.monthlySales){
-  return <><div className="w-full h-full flex justify-center items-center">Loading...</div></>
-}
-const bestMonth = departData.monthlySales.reduce((max, curr) =>
- curr.revenue > max.revenue ? curr : max
-);
-const avgRevenue =
- departData.monthlySales.reduce((sum, m) => sum + m.revenue, 0) /
- departData.monthlySales.length;
+  if (monthlySales.length === 0) {
+    return (
+      <div className="w-full h-full flex justify-center items-center text-gray-400">
+        Not enough data to display charts yet.
+      </div>
+    );
+  }
+
+  // ✅ Safe reduce with defaults
+  const bestMonth = monthlySales.reduce((max, curr) =>
+    curr.revenue > max.revenue ? curr : max
+  );
+  const avgRevenue =
+    monthlySales.reduce((sum, m) => sum + m.revenue, 0) / monthlySales.length;
 
   return (
-   <div className="flex flex-col gap-3.5">
-     <header className="flex p-5">
-       <motion.h2 initial={{opacity:0, y:30}}
-          animate={{opacity:1, y:0}}
-          transition={{duration : 0.8}} className="text-lg sm:text-2xl font-bold bg-gray-800/50 p-2 rounded-lg">{departData.name + ' Insights'}</motion.h2>
-     </header>
+    <div className="flex flex-col gap-3.5">
+      <header className="flex p-5">
+        <motion.h2
+          initial={{ opacity: 0, y: 30 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.8 }}
+          className="text-lg sm:text-2xl font-bold bg-gray-800/50 p-2 rounded-lg"
+        >
+          {departData.name + " Insights"}
+        </motion.h2>
+      </header>
      <main className="flex flex-col w-full items-center gap-4">
            <div className="flex flex-col gap-8 sm:gap-0 sm:flex-row w-[90%] sm:w-[80%] bg-gray-800/30 p-2 pt-7 rounded-2xl">
                <motion.div 
