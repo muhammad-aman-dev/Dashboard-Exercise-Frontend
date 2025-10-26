@@ -61,6 +61,13 @@ export const storeData = {
         { month: "Nov", revenue: 48000 },
         { month: "Dec", revenue: 49000 },
       ],
+      topProductsLastMonth: [
+        { id: "g01", name: "Organic Apples Pack", unitsSold: 420, revenue: 5100 },
+        { id: "g02", name: "Whole Grain Bread", unitsSold: 380, revenue: 4700 },
+        { id: "g03", name: "Almond Milk 1L", unitsSold: 260, revenue: 3900 },
+        { id: "g04", name: "Fresh Bananas 1kg", unitsSold: 480, revenue: 3600 },
+        { id: "g05", name: "Free-Range Eggs (12pcs)", unitsSold: 310, revenue: 3200 },
+      ],
     },
     {
       id: "electronics",
@@ -94,6 +101,13 @@ export const storeData = {
         { month: "Oct", revenue: 28000 },
         { month: "Nov", revenue: 37000 },
         { month: "Dec", revenue: 38000 },
+      ],
+      topProductsLastMonth: [
+        { id: "e01", name: "Smartphone X12", unitsSold: 120, revenue: 48000 },
+        { id: "e02", name: "Wireless Earbuds Pro", unitsSold: 180, revenue: 27000 },
+        { id: "e03", name: "4K Smart TV 55\"", unitsSold: 35, revenue: 21000 },
+        { id: "e04", name: "Gaming Laptop Z5", unitsSold: 20, revenue: 15000 },
+        { id: "e05", name: "Bluetooth Speaker Mini", unitsSold: 250, revenue: 12000 },
       ],
     },
     {
@@ -129,6 +143,13 @@ export const storeData = {
         { month: "Nov", revenue: 22000 },
         { month: "Dec", revenue: 23000 },
       ],
+      topProductsLastMonth: [
+        { id: "f01", name: "Designer Handbag", unitsSold: 35, revenue: 7800 },
+        { id: "f02", name: "Casual T-Shirt Pack", unitsSold: 120, revenue: 4800 },
+        { id: "f03", name: "Winter Jacket", unitsSold: 40, revenue: 6200 },
+        { id: "f04", name: "Sneakers Classic", unitsSold: 55, revenue: 5900 },
+        { id: "f05", name: "Silk Scarf", unitsSold: 75, revenue: 3300 },
+      ],
     },
     {
       id: "furniture",
@@ -162,6 +183,13 @@ export const storeData = {
         { month: "Oct", revenue: 11200 },
         { month: "Nov", revenue: 13500 },
         { month: "Dec", revenue: 14000 },
+      ],
+      topProductsLastMonth: [
+        { id: "fu01", name: "Luxury Sofa Set", unitsSold: 8, revenue: 9600 },
+        { id: "fu02", name: "Wooden Dining Table", unitsSold: 6, revenue: 8200 },
+        { id: "fu03", name: "Office Chair", unitsSold: 14, revenue: 5600 },
+        { id: "fu04", name: "Queen Bed Frame", unitsSold: 5, revenue: 7200 },
+        { id: "fu05", name: "Bookshelf Unit", unitsSold: 10, revenue: 4800 },
       ],
     },
     {
@@ -197,6 +225,13 @@ export const storeData = {
         { month: "Nov", revenue: 11500 },
         { month: "Dec", revenue: 11800 },
       ],
+      topProductsLastMonth: [
+        { id: "c01", name: "Face Serum", unitsSold: 60, revenue: 2400 },
+        { id: "c02", name: "Lipstick Velvet Red", unitsSold: 110, revenue: 3300 },
+        { id: "c03", name: "Hydrating Moisturizer", unitsSold: 75, revenue: 2800 },
+        { id: "c04", name: "Eyeliner Pen", unitsSold: 95, revenue: 1900 },
+        { id: "c05", name: "Compact Powder", unitsSold: 80, revenue: 2400 },
+      ],
     },
     {
       id: "home-appliances",
@@ -230,6 +265,13 @@ export const storeData = {
         { month: "Oct", revenue: 8200 },
         { month: "Nov", revenue: 9400 },
         { month: "Dec", revenue: 9600 },
+      ],
+      topProductsLastMonth: [
+        { id: "ha01", name: "Air Fryer 4L", unitsSold: 25, revenue: 3000 },
+        { id: "ha02", name: "Microwave Oven 20L", unitsSold: 18, revenue: 2700 },
+        { id: "ha03", name: "Vacuum Cleaner", unitsSold: 20, revenue: 2400 },
+        { id: "ha04", name: "Coffee Maker", unitsSold: 30, revenue: 2100 },
+        { id: "ha05", name: "Electric Kettle", unitsSold: 45, revenue: 1400 },
       ],
     },
   ],

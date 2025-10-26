@@ -81,7 +81,8 @@ export default function Home() {
       <header className="flex p-5">
         <motion.h2
           initial={{ opacity: 0, y: 30 }}
-          animate={{ opacity: 1, y: 0 }}
+          whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
           transition={{ duration: 0.8 }}
           className="text-2xl font-bold bg-gray-800/50 p-2 rounded-lg"
         >
@@ -93,7 +94,8 @@ export default function Home() {
         <div className="flex flex-col gap-8 sm:gap-0 sm:flex-row w-[90%] sm:w-[80%] bg-gray-800/30 p-2 pt-7 rounded-2xl">
           <motion.div
             initial={{ opacity: 0, y: 30 }}
-            animate={{ opacity: 1, y: 0 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
             transition={{ duration: 0.8 }}
             className="w-full sm:w-1/2"
           >
@@ -127,7 +129,8 @@ export default function Home() {
 
           <motion.div
             initial={{ opacity: 0, y: 30 }}
-            animate={{ opacity: 1, y: 0 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
             transition={{ duration: 0.8 }}
             className="w-full sm:w-1/2 flex flex-col justify-center items-center gap-6 p-6 bg-gray-800/40 rounded-2xl border border-[#10b981]/20 backdrop-blur-sm"
           >
@@ -147,7 +150,8 @@ export default function Home() {
         {monthlySales.length > 0 && bestMonth ? (
           <motion.div
             initial={{ opacity: 0, y: 30 }}
-            animate={{ opacity: 1, y: 0 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
             transition={{ duration: 0.8 }}
             className="flex flex-col w-[90%] sm:w-[80%] items-center bg-gray-800/30 rounded-2xl p-6 border border-[#10b981]/20 backdrop-blur-sm"
           >
@@ -431,6 +435,7 @@ export default function Home() {
                 <div className="flex justify-end w-full">
                   <Link
                     href={`/${dept.id}`}
+                    target="_blank"
                     className="border-[#10b981] border-b w-fit"
                   >
                     view details {'>'}
